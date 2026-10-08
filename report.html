@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Report | MediCare EMR</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🏥 MediCare</h2>
+            <p>EMR System</p>
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                🏠 Dashboard
+            </a>
+
+            <a href="patient.html">
+                👤 Patients
+            </a>
+
+            <a href="registration.html">
+                📝 Registration
+            </a>
+
+            <a href="appointment.html">
+                📅 Appointments
+            </a>
+
+            <a href="billing.html">
+                💳 Billing
+            </a>
+
+            <a href="salesreturn.html">
+                🧾 Sales Return
+            </a>
+
+            <a href="pharmacy.html">
+                💊 Pharmacy
+            </a>
+
+            <a href="lab.html">
+                🧪 Laboratory
+            </a>
+
+            <a href="surgery.html">
+                🏥 Surgery
+            </a>
+
+            <a href="report.html" class="active">
+                📊 Reports
+            </a>
+
+
+            <!-- =====================================
+                 MASTER MENU
+            ====================================== -->
+
+            <button
+                type="button"
+                class="master-menu-button"
+                id="masterMenuButton"
+            >
+
+                <span>
+                    🗂️ Master
+                </span>
+
+                <span class="master-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+
+            <!-- MASTER SUBMENU -->
+
+            <div
+                class="master-submenu"
+                id="masterSubmenu"
+            >
+
+                <a href="master-address.html">
+                    ○ Address
+                </a>
+
+                <a href="master-patient.html">
+                    ○ Patient
+                </a>
+
+                <a href="master-department.html">
+                    ○ Department / Specialty
+                </a>
+
+                <a href="master-doctor.html">
+                    ○ Doctor
+                </a>
+
+                <a href="master-employee.html">
+                    ○ Employee
+                </a>
+
+                <a href="master-appointment-schedule.html">
+                    ○ Appointment Time Schedule
+                </a>
+
+                <a href="master-doctor-schedule.html">
+                    ○ Doctor Schedule
+                </a>
+
+                <a href="master-doctor-day-off.html">
+                    ○ Doctor's Day Off Schedule
+                </a>
+
+                <a href="master-donor.html">
+                    ○ Donor
+                </a>
+
+                <a href="master-appointment-category.html">
+                    ○ Appointment Category
+                </a>
+
+                <a href="master-registration-type.html">
+                    ○ Registration Type
+                </a>
+
+                <a href="master-user-registration-type.html">
+                    ○ User Registration Type
+                </a>
+
+                <a href="master-user-care-type.html">
+                    ○ User Care Type Map
+                </a>
+
+                <a href="master-registration-time.html">
+                    ○ Registration Type Available Time
+                </a>
+
+                <a href="master-opd-time.html">
+                    ○ OPD Unit Available Time
+                </a>
+
+                <a href="master-sub-specialty.html">
+                    ○ Sub Specialty
+                </a>
+
+                <a href="master-opd-unit.html">
+                    ○ OPD Unit
+                </a>
+
+                <a href="master-opd-quota.html">
+                    ○ OPD Unit Quota
+                </a>
+
+                <a href="master-working-shift.html">
+                    ○ Working Shift
+                </a>
+
+                <a href="master-glossary.html">
+                    ○ Master Glossary
+                </a>
+
+                <a href="master-advice-group.html">
+                    ○ Advice Group
+                </a>
+
+                <a href="master-investigation.html">
+                    ○ Investigation
+                </a>
+
+                <a href="master-emr-priority.html">
+                    ○ EMR Priority
+                </a>
+
+                <a href="master-patient-movement-state.html">
+                    ○ Patient Movement State
+                </a>
+
+                <a href="master-patient-movement-station.html">
+                    ○ Patient Movement Station
+                </a>
+
+                <a href="master-station-employee.html">
+                    ○ Station Employee
+                </a>
+
+            </div>
+
+
+            <!-- SETTINGS -->
+
+            <a href="setting.html">
+                ⚙️ Settings
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================
+         MAIN CONTENT
+    ====================================== -->
+
+    <main class="main-content">
+
+        <section class="report-page">
+
+
+            <!-- HEADER -->
+
+            <div class="report-heading">
+
+                <div>
+
+                    <span class="page-label">
+                        REPORTS
+                    </span>
+
+                    <h1>
+                        Registration Report
+                    </h1>
+
+                    <p>
+                        View and search patient registration records
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="print-report-btn"
+                    onclick="window.print()"
+                >
+                    🖨 Print Report
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 SEARCH
+            ====================================== -->
+
+            <div class="report-filter-card">
+
+                <div class="report-search">
+
+                    <label for="registrationReportSearch">
+                        Search
+                    </label>
+
+
+                    <div class="search-input-wrapper">
+
+                        <span>
+                            🔎
+                        </span>
+
+                        <input
+                            type="text"
+                            id="registrationReportSearch"
+                            placeholder="Search MRN, patient, doctor, department..."
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 REGISTRATION TABLE
+            ====================================== -->
+
+            <div class="registration-report-card">
+
+
+                <div class="report-table-heading">
+
+                    <div>
+
+                        <h2>
+                            Patient Registrations
+                        </h2>
+
+                        <p>
+                            Registration history
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-count">
+
+                        Total:
+
+                        <strong id="registrationCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="registration-report-table-wrapper">
+
+                    <table class="registration-report-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Sn.</th>
+
+                                <th>
+                                    Patient MRN
+                                </th>
+
+                                <th>
+                                    Patient
+                                </th>
+
+                                <th>
+                                    Registration Type
+                                </th>
+
+                                <th>
+                                    Municipal
+                                </th>
+
+                                <th>
+                                    Department
+                                </th>
+
+                                <th>
+                                    Doctor
+                                </th>
+
+                                <th>
+                                    Visit Type
+                                </th>
+
+                                <th>
+                                    Visit Date Time
+                                </th>
+
+                                <th>
+                                    Insert User
+                                </th>
+
+                                <th>
+                                    Insert Time
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="registrationReportBody">
+
+                            <!--
+                                JavaScript will
+                                automatically add
+                                registrations here
+                            -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- =====================================
+                     EMPTY REPORT MESSAGE
+                ====================================== -->
+
+                <div
+                    id="noRegistrationData"
+                    class="no-report-data"
+                >
+
+                    <div class="empty-report-icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        No registration records
+                    </h3>
+
+                    <p>
+                        Register a demo patient and the
+                        record will appear here automatically.
+                    </p>
+
+                    <a href="registration.html">
+                        + New Registration
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

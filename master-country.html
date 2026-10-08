@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Master | MediCare EMR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>🏥 MediCare</h2>
+            <p>EMR System</p>
+        </div>
+
+        <nav>
+            <a href="index.html">🏠 Dashboard</a>
+            <a href="patient.html">👤 Patients</a>
+            <a href="registration.html">📝 Registration</a>
+            <a href="appointment.html">📅 Appointments</a>
+            <a href="billing.html">💳 Billing</a>
+            <a href="report.html">📊 Reports</a>
+
+            <button type="button" class="master-menu-button open"
+                    id="masterMenuButton">
+                <span>☷ Master</span>
+                <span class="master-arrow">▼</span>
+            </button>
+
+            <div class="master-submenu show" id="masterSubmenu">
+
+                <button type="button" class="address-menu-button open"
+                        id="addressMenuButton">
+                    <span>○ Address</span>
+                    <span class="address-arrow">▼</span>
+                </button>
+
+                <div class="address-submenu show" id="addressSubmenu">
+                    <a href="master-country.html" class="active">○ Country</a>
+                    <a href="master-province.html">○ Province</a>
+                    <a href="master-district.html">○ District</a>
+                    <a href="master-municipal.html">○ Municipal</a>
+                    <a href="master-occupation.html">○ Occupation</a>
+                    <a href="master-religion.html">○ Religion</a>
+                    <a href="master-ethnic-group.html">○ Ethnic Group</a>
+                    <a href="master-identity-proof-type.html">○ Identity Proof Type</a>
+                    <a href="master-disability.html">○ Disability</a>
+                </div>
+
+            </div>
+
+            <a href="setting.html">⚙️ Settings</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <div>
+                <h1>Country</h1>
+                <p>Master / Address / Country</p>
+            </div>
+            <div class="admin">👤 Admin</div>
+        </div>
+
+        <section class="master-form-card">
+            <h2>Add New Country</h2>
+            <p>Enter country information below.</p>
+
+            <form id="countryForm">
+                <div class="master-form-grid">
+
+                    <div class="master-form-group">
+                        <label for="countryName">Country Name *</label>
+                        <input type="text" id="countryName" required>
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="countryCode">Country Calling Code</label>
+                        <input type="text" id="countryCode" placeholder="+977">
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="countryStatus">Is Active</label>
+                        <select id="countryStatus">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="master-actions">
+                    <button type="reset" class="master-btn master-clear-btn">
+                        Clear
+                    </button>
+                    <button type="submit" class="master-btn master-save-btn">
+                        Save Country
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="master-list-card">
+
+            <div class="master-list-header">
+                <div>
+                    <h2>Country List</h2>
+                    <p>Manage country records</p>
+                </div>
+
+                <div class="master-search">
+                    <span>🔍</span>
+                    <input type="search" id="countrySearch"
+                           placeholder="Search country...">
+                </div>
+            </div>
+
+            <div class="master-table-wrapper">
+                <table class="master-table">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Country Name</th>
+                            <th>Country Calling Code</th>
+                            <th>Is Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="countryTableBody"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+(function () {
+    const form = document.getElementById("countryForm");
+    const tbody = document.getElementById("countryTableBody");
+    const search = document.getElementById("countrySearch");
+    const nameInput = document.getElementById("countryName");
+    const codeInput = document.getElementById("countryCode");
+    const statusInput = document.getElementById("countryStatus");
+
+    const storageKey = "emrCountries";
+    let countries = [];
+
+    try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+        countries = Array.isArray(saved) ? saved : [];
+    } catch (error) {
+        countries = [];
+    }
+
+    let editingId = null;
+
+    function save() {
+        localStorage.setItem(storageKey, JSON.stringify(countries));
+    }
+
+    function render() {
+        tbody.replaceChildren();
+        const keyword = search.value.trim().toLowerCase();
+
+        const filtered = countries.filter(country =>
+            country.name.toLowerCase().includes(keyword) ||
+            country.code.toLowerCase().includes(keyword)
+        );
+
+        filtered.forEach((country, index) => {
+            const row = document.createElement("tr");
+
+            function cell(value) {
+                const td = document.createElement("td");
+                td.textContent = value;
+                row.appendChild(td);
+                return td;
+            }
+
+            cell(index + 1);
+            cell(country.name);
+            cell(country.code);
+
+            const statusCell = cell(country.status);
+            statusCell.className =
+                country.status === "Active"
+                    ? "active-badge"
+                    : "inactive-badge";
+
+            const actionCell = document.createElement("td");
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.textContent = "Edit";
+            editButton.className = "edit-btn";
+
+            editButton.addEventListener("click", () => {
+                editingId = country.id;
+                nameInput.value = country.name;
+                codeInput.value = country.code;
+                statusInput.value = country.status;
+                nameInput.focus();
+            });
+
+            actionCell.appendChild(editButton);
+            row.appendChild(actionCell);
+            tbody.appendChild(row);
+        });
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const td = document.createElement("td");
+            td.colSpan = 5;
+            td.textContent = "No countries found.";
+            td.style.textAlign = "center";
+            row.appendChild(td);
+            tbody.appendChild(row);
+        }
+    }
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = nameInput.value.trim();
+        const code = codeInput.value.trim();
+        const status = statusInput.value;
+
+        if (!name) return;
+
+        if (editingId !== null) {
+            const country = countries.find(item => item.id === editingId);
+            if (country) {
+                country.name = name;
+                country.code = code;
+                country.status = status;
+            }
+        } else {
+            countries.push({
+                id: crypto.randomUUID(),
+                name,
+                code,
+                status
+            });
+        }
+
+        save();
+        form.reset();
+        editingId = null;
+        render();
+    });
+
+    form.addEventListener("reset", () => {
+        editingId = null;
+    });
+
+    search.addEventListener("input", render);
+
+    render();
+})();
+</script>
+
+</body>
+</html>

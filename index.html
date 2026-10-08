@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediCare EMR | Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🏥 MediCare</h2>
+            <p>EMR System</p>
+        </div>
+
+
+        <nav>
+
+            <!-- DASHBOARD -->
+
+            <a href="index.html" class="active">
+                🏠 Dashboard
+            </a>
+
+
+            <!-- PATIENTS -->
+
+            <a href="patient.html">
+                👤 Patients
+            </a>
+
+
+            <!-- REGISTRATION -->
+
+            <a href="registration.html">
+                📝 Registration
+            </a>
+
+
+            <!-- APPOINTMENTS -->
+
+            <a href="appointment.html">
+                📅 Appointments
+            </a>
+
+
+            <!-- BILLING -->
+
+            <a href="billing.html">
+                💳 Billing
+            </a>
+
+
+            <!-- SALES RETURN -->
+
+            <a href="salesreturn.html">
+                🧾 Sales Return
+            </a>
+
+
+            <!-- PHARMACY -->
+
+            <a href="pharmacy.html">
+                💊 Pharmacy
+            </a>
+
+
+            <!-- LABORATORY -->
+
+            <a href="lab.html">
+                🧪 Laboratory
+            </a>
+
+
+            <!-- SURGERY -->
+
+            <a href="surgery.html">
+                🏥 Surgery
+            </a>
+
+
+            <!-- REPORT -->
+
+            <a href="report.html">
+                📊 Reports
+            </a>
+
+
+
+            <!-- =================================================
+                 MASTER
+            ================================================== -->
+
+            <button
+                type="button"
+                class="master-menu-button"
+                id="masterMenuButton"
+            >
+
+                <span>
+                    ☷ &nbsp; Master
+                </span>
+
+                <span class="master-arrow">
+                    ▼
+                </span>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 MASTER SUBMENU
+            ================================================== -->
+
+            <div
+                class="master-submenu"
+                id="masterSubmenu"
+            >
+
+
+                <!-- =================================================
+                     ADDRESS
+                ================================================== -->
+
+                <button
+                    type="button"
+                    class="address-menu-button"
+                    id="addressMenuButton"
+                >
+
+                    <span>
+                        ○ &nbsp; Address
+                    </span>
+
+                    <span class="address-arrow">
+                        ▼
+                    </span>
+
+                </button>
+
+
+                <!-- ADDRESS SUBMENU -->
+
+                <div
+                    class="address-submenu"
+                    id="addressSubmenu"
+                >
+
+                    <a href="master-country.html">
+                        ○ Country
+                    </a>
+
+                    <a href="master-province.html">
+                        ○ Province
+                    </a>
+
+                    <a href="master-district.html">
+                        ○ District
+                    </a>
+
+                    <a href="master-municipal.html">
+                        ○ Municipal
+                    </a>
+
+                    <a href="master-occupation.html">
+                        ○ Occupation
+                    </a>
+
+                    <a href="master-religion.html">
+                        ○ Religion
+                    </a>
+
+                    <a href="master-ethnic-group.html">
+                        ○ Ethnic Group
+                    </a>
+
+                    <a href="master-identity-proof-type.html">
+                        ○ Identity Proof Type
+                    </a>
+
+                    <a href="master-disability.html">
+                        ○ Disability
+                    </a>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PATIENT
+                ================================================== -->
+
+                <a href="master-patient.html">
+                    ○ Patient
+                </a>
+
+
+
+                <!-- =================================================
+                     REGISTRATION / DOCTOR
+                ================================================== -->
+
+                <a href="master-department.html">
+                    ○ Department / Specialty
+                </a>
+
+
+                <a href="master-doctor.html">
+                    ○ Doctor
+                </a>
+
+
+                <a href="master-employee.html">
+                    ○ Employee
+                </a>
+
+
+                <a href="master-appointment-schedule.html">
+                    ○ Appointment Time Schedule
+                </a>
+
+
+                <a href="master-doctor-schedule.html">
+                    ○ Doctor Schedule
+                </a>
+
+
+                <a href="master-doctor-day-off.html">
+                    ○ Doctor's Day Off Schedule
+                </a>
+
+
+                <a href="master-donor.html">
+                    ○ Donor
+                </a>
+
+
+
+                <!-- =================================================
+                     REGISTRATION MASTER
+                ================================================== -->
+
+                <a href="master-appointment-category.html">
+                    ○ Appointment Category
+                </a>
+
+
+                <a href="master-registration-type.html">
+                    ○ Registration Type
+                </a>
+
+
+                <a href="master-user-registration-type.html">
+                    ○ User Registration Type
+                </a>
+
+
+                <a href="master-user-care-type.html">
+                    ○ User Care Type Map
+                </a>
+
+
+                <a href="master-registration-time.html">
+                    ○ Registration Type Available Time
+                </a>
+
+
+                <a href="master-opd-time.html">
+                    ○ OPD Unit Available Time
+                </a>
+
+
+                <a href="master-sub-specialty.html">
+                    ○ Sub Specialty
+                </a>
+
+
+                <a href="master-opd-unit.html">
+                    ○ Opd Unit
+                </a>
+
+
+                <a href="master-opd-quota.html">
+                    ○ Opd Unit Quota
+                </a>
+
+
+                <a href="master-working-shift.html">
+                    ○ Working Shift
+                </a>
+
+
+                <a href="master-glossary.html">
+                    ○ Master Glossary
+                </a>
+
+
+                <a href="master-advice-group.html">
+                    ○ Advice Group
+                </a>
+
+
+                <a href="master-investigation.html">
+                    ○ Investigation
+                </a>
+
+
+                <a href="master-emr-priority.html">
+                    ○ EMR Priority
+                </a>
+
+
+                <a href="master-patient-movement-state.html">
+                    ○ Patient Movement State
+                </a>
+
+
+                <a href="master-patient-movement-station.html">
+                    ○ Patient Movement Station
+                </a>
+
+
+                <a href="master-station-employee.html">
+                    ○ Station Employee
+                </a>
+
+
+                <a href="master-unit-station.html">
+                    ○ Unit Station
+                </a>
+
+
+                <a href="master-sub-speciality-station.html">
+                    ○ Sub Speciality Station
+                </a>
+
+
+                <a href="master-reg-followup-type.html">
+                    ○ Reg Followup Type
+                </a>
+
+
+                <a href="master-follow-up-setup.html">
+                    ○ Follow Up Setup
+                </a>
+
+
+
+                <!-- =================================================
+                     EMR / CODING MASTER
+                ================================================== -->
+
+                <a href="master-finding.html">
+                    ○ Finding Master
+                </a>
+
+
+                <a href="master-emr-section.html">
+                    ○ Emr Section
+                </a>
+
+
+                <a href="master-emr-module.html">
+                    ○ Emr Module Master
+                </a>
+
+
+                <a href="master-user-emr-module-permission.html">
+                    ○ User Emr Module Permission
+                </a>
+
+
+                <a href="master-user-emr-module.html">
+                    ○ User Emr Module
+                </a>
+
+
+                <a href="master-diagnosis.html">
+                    ○ Diagnosis
+                </a>
+
+
+                <a href="master-medicine.html">
+                    ○ Medicine
+                </a>
+
+
+                <a href="master-medicine-template-paperless.html">
+                    ○ Medicine Advice Templates (For Paperless)
+                </a>
+
+
+                <a href="master-medicine-template-coding.html">
+                    ○ Medicine Advice Templates (For Coding)
+                </a>
+
+
+                <a href="master-treatment-plan-therapy.html">
+                    ○ Treatment Plan Therapy
+                </a>
+
+
+                <a href="master-medical-management.html">
+                    ○ Medical Management
+                </a>
+
+
+
+                <!-- =================================================
+                     SURGERY / IPD MASTER
+                ================================================== -->
+
+                <a href="master-discharge-print-template.html">
+                    ○ Discharge Print Template
+                </a>
+
+
+                <a href="master-ward.html">
+                    ○ Ward
+                </a>
+
+
+                <a href="master-bed.html">
+                    ○ Bed
+                </a>
+
+
+                <a href="master-surgery.html">
+                    ○ Surgery
+                </a>
+
+
+                <a href="master-surgery-technique.html">
+                    ○ Surgery Technique
+                </a>
+
+
+                <a href="master-surgery-iol.html">
+                    ○ Surgery IOL
+                </a>
+
+
+                <a href="master-surgery-detail-item.html">
+                    ○ Surgery Detail Item
+                </a>
+
+
+                <a href="master-implant-product-group-map.html">
+                    ○ Implant Product Group Map
+                </a>
+
+
+                <a href="master-surgery-technique-iol-map.html">
+                    ○ Surgery Technique IOL Map
+                </a>
+
+
+                <a href="master-surgery-detail-item-map.html">
+                    ○ Surgery Detail Item Map
+                </a>
+
+
+
+                <!-- =================================================
+                     TRANSFER / REFERRAL MASTER
+                ================================================== -->
+
+                <a href="master-patient-transfer-policy.html">
+                    ○ Manage Patient Transfer Policy
+                </a>
+
+
+                <a href="master-referred-center-out.html">
+                    ○ Referred Center (Out)
+                </a>
+
+
+                <a href="master-referred-out-onboarding.html">
+                    ○ Referred Out Center On Boarding
+                </a>
+
+
+                <a href="master-referral-in-onboarding.html">
+                    ○ Referral In Center On Boarding
+                </a>
+
+
+                <a href="master-referral-center-branch-map.html">
+                    ○ Referral Center (In) Branch Map
+                </a>
+
+
+
+                <!-- =================================================
+                     OTHER MASTER SETTINGS
+                ================================================== -->
+
+                <a href="master-procedure-note-template.html">
+                    ○ Procedure Note Template
+                </a>
+
+
+                <a href="master-dashboard-widget-setting.html">
+                    ○ Dashboard Widget Setting
+                </a>
+
+
+                <a href="master-telemedicine-configuration.html">
+                    ○ Telemedicine Configuration
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <a href="setting.html">
+                ⚙️ Settings
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+
+            <div>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Welcome to MediCare EMR System
+                </p>
+
+            </div>
+
+
+
+            <div class="admin">
+
+                <span>
+                    👤
+                </span>
+
+                <div>
+
+                    <strong>
+                        Admin
+                    </strong>
+
+                    <p>
+                        Administrator
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             DASHBOARD CARDS
+        ================================================== -->
+
+        <section class="cards">
+
+
+            <!-- TOTAL PATIENTS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <p>
+                        Total Patients
+                    </p>
+
+                    <h2 id="totalPatients">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TODAY REGISTRATION -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <p>
+                        Today's Registrations
+                    </p>
+
+                    <h2 id="todayRegistrations">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APPOINTMENTS -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <p>
+                        Appointments
+                    </p>
+
+                    <h2 id="totalAppointments">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BILLING -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    💳
+                </div>
+
+                <div>
+
+                    <p>
+                        Today's Billing
+                    </p>
+
+                    <h2 id="todayBilling">
+                        Rs. 0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <section class="appointments">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Frequently used EMR functions
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-quick-actions">
+
+
+                <a
+                    href="registration.html"
+                    class="dashboard-action"
+                >
+
+                    <span>
+                        📝
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            New Registration
+                        </strong>
+
+                        <p>
+                            Register a new patient
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="appointment.html"
+                    class="dashboard-action"
+                >
+
+                    <span>
+                        📅
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Appointment
+                        </strong>
+
+                        <p>
+                            Create patient appointment
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="billing.html"
+                    class="dashboard-action"
+                >
+
+                    <span>
+                        💳
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Billing
+                        </strong>
+
+                        <p>
+                            Create patient bill
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="report.html"
+                    class="dashboard-action"
+                >
+
+                    <span>
+                        📊
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Registration Report
+                        </strong>
+
+                        <p>
+                            View registration records
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT REGISTRATIONS
+        ================================================== -->
+
+        <section
+            class="appointments"
+            style="margin-top:25px;"
+        >
+
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <h2>
+                        Recent Registrations
+                    </h2>
+
+                    <p>
+                        Recently registered demo patients
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="report.html"
+                    class="view-report-link"
+                >
+                    View Report →
+                </a>
+
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                MRN
+                            </th>
+
+                            <th>
+                                Patient
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Doctor
+                            </th>
+
+                            <th>
+                                Visit Date & Time
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="dashboardRecentRegistrations">
+
+
+                        <tr id="dashboardNoRecords">
+
+                            <td
+                                colspan="6"
+                                style="
+                                    text-align:center;
+                                    color:#89939e;
+                                    padding:35px;
+                                "
+                            >
+
+                                No registrations yet.
+
+                                <br><br>
+
+                                <a href="registration.html">
+                                    Register a demo patient
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

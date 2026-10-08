@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Municipal Master | MediCare EMR</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+    <div class="logo">
+        <h2>🏥 MediCare</h2>
+        <p>EMR System</p>
+    </div>
+
+    <nav>
+        <a href="index.html">🏠 Dashboard</a>
+        <a href="patient.html">👤 Patients</a>
+        <a href="registration.html">📝 Registration</a>
+        <a href="appointment.html">📅 Appointments</a>
+        <a href="billing.html">💳 Billing</a>
+        <a href="salesreturn.html">🧾 Sales Return</a>
+        <a href="pharmacy.html">💊 Pharmacy</a>
+        <a href="lab.html">🧪 Laboratory</a>
+        <a href="surgery.html">🏥 Surgery</a>
+        <a href="report.html">📊 Reports</a>
+
+        <button type="button" class="master-menu-button open"
+                id="masterMenuButton">
+            <span>☷ Master</span>
+            <span class="master-arrow">▼</span>
+        </button>
+
+        <div class="master-submenu show" id="masterSubmenu">
+            <button type="button" class="address-menu-button open"
+                    id="addressMenuButton">
+                <span>○ Address</span>
+                <span class="address-arrow">▼</span>
+            </button>
+
+            <div class="address-submenu show" id="addressSubmenu">
+                <a href="master-country.html">○ Country</a>
+                <a href="master-province.html">○ Province</a>
+                <a href="master-district.html">○ District</a>
+                <a href="master-municipal.html" class="active">○ Municipal</a>
+                <a href="master-occupation.html">○ Occupation</a>
+                <a href="master-religion.html">○ Religion</a>
+                <a href="master-ethnic-group.html">○ Ethnic Group</a>
+                <a href="master-identity-proof-type.html">○ Identity Proof Type</a>
+                <a href="master-disability.html">○ Disability</a>
+            </div>
+        </div>
+
+        <a href="setting.html">⚙️ Settings</a>
+    </nav>
+</aside>
+
+<main class="main-content">
+
+    <div class="topbar">
+        <div>
+            <h1>Municipal Master</h1>
+            <p>Master / Address / Municipal</p>
+        </div>
+        <div class="admin">👤 Admin</div>
+    </div>
+
+    <section class="master-form-card">
+        <h2 id="municipalFormTitle">Add New Municipal</h2>
+        <p>Select Country, Province and District before adding a municipal area.</p>
+
+        <form id="municipalForm">
+            <div class="master-form-grid">
+
+                <div class="master-form-group">
+                    <label for="municipalCountry">Country *</label>
+                    <select id="municipalCountry" required>
+                        <option value="">Select Country</option>
+                    </select>
+                </div>
+
+                <div class="master-form-group">
+                    <label for="municipalProvince">Province *</label>
+                    <select id="municipalProvince" required>
+                        <option value="">Select Province</option>
+                    </select>
+                </div>
+
+                <div class="master-form-group">
+                    <label for="municipalDistrict">District *</label>
+                    <select id="municipalDistrict" required>
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+                <div class="master-form-group">
+                    <label for="municipalName">Municipal Name *</label>
+                    <input type="text" id="municipalName"
+                           placeholder="Enter municipal name" required>
+                </div>
+
+                <div class="master-form-group">
+                    <label for="municipalStatus">Is Active</label>
+                    <select id="municipalStatus">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="master-actions">
+                <button type="button" id="clearMunicipalBtn"
+                        class="master-btn master-clear-btn">
+                    Clear
+                </button>
+
+                <button type="submit" id="saveMunicipalBtn"
+                        class="master-btn master-save-btn">
+                    Save Municipal
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="master-list-card">
+        <div class="master-list-header">
+            <div>
+                <h2>Municipal List</h2>
+                <p>View and manage saved municipal areas</p>
+            </div>
+
+            <div class="master-search">
+                <span>🔍</span>
+                <input type="search" id="municipalSearch"
+                       placeholder="Search municipal...">
+            </div>
+        </div>
+
+        <div class="master-table-wrapper">
+            <table class="master-table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Country</th>
+                        <th>Province</th>
+                        <th>District</th>
+                        <th>Municipal Name</th>
+                        <th>Is Active</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="municipalTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const country = document.getElementById("municipalCountry");
+    const province = document.getElementById("municipalProvince");
+    const district = document.getElementById("municipalDistrict");
+    const nameInput = document.getElementById("municipalName");
+    const statusInput = document.getElementById("municipalStatus");
+    const form = document.getElementById("municipalForm");
+    const search = document.getElementById("municipalSearch");
+    const tableBody = document.getElementById("municipalTableBody");
+    const clearBtn = document.getElementById("clearMunicipalBtn");
+    const saveBtn = document.getElementById("saveMunicipalBtn");
+    const formTitle = document.getElementById("municipalFormTitle");
+
+    let editingId = null;
+
+    function readData(key) {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            console.error("Storage error:", error);
+            return [];
+        }
+    }
+
+    let municipalities = readData("emrMunicipals");
+
+    function normalize(value) {
+        return String(value || "").trim().toLowerCase();
+    }
+
+    function fillOptions(select, placeholder, records, previous = "") {
+        select.replaceChildren();
+        select.add(new Option(placeholder, ""));
+
+        records.forEach(function (item) {
+            const name = String(item.name || "").trim();
+            if (name) select.add(new Option(name, name));
+        });
+
+        const match = [...select.options].find(
+            option => normalize(option.value) === normalize(previous)
+        );
+
+        if (match) select.value = match.value;
+    }
+
+    function loadCountries() {
+        const previous = country.value;
+
+        fillOptions(
+            country,
+            "Select Country",
+            readData("emrCountries").filter(
+                item => normalize(item.status) === "active"
+            ),
+            previous
+        );
+
+        loadProvinces();
+    }
+
+    function loadProvinces() {
+        const previous = province.value;
+
+        fillOptions(
+            province,
+            "Select Province",
+            readData("emrProvinces").filter(item =>
+                normalize(item.status) === "active" &&
+                normalize(item.country) === normalize(country.value)
+            ),
+            previous
+        );
+
+        loadDistricts();
+    }
+
+    function loadDistricts() {
+        const previous = district.value;
+
+        fillOptions(
+            district,
+            "Select District",
+            readData("emrDistricts").filter(item =>
+                normalize(item.status) === "active" &&
+                normalize(item.country) === normalize(country.value) &&
+                normalize(item.province) === normalize(province.value)
+            ),
+            previous
+        );
+    }
+
+    function saveMunicipals() {
+        localStorage.setItem(
+            "emrMunicipals",
+            JSON.stringify(municipalities)
+        );
+    }
+
+    function resetForm() {
+        form.reset();
+        editingId = null;
+        formTitle.textContent = "Add New Municipal";
+        saveBtn.textContent = "Save Municipal";
+        loadCountries();
+    }
+
+    function addCell(row, value) {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+        return cell;
+    }
+
+    function renderTable() {
+        const keyword = normalize(search.value);
+
+        const filtered = municipalities.filter(item =>
+            normalize(item.country).includes(keyword) ||
+            normalize(item.province).includes(keyword) ||
+            normalize(item.district).includes(keyword) ||
+            normalize(item.name).includes(keyword)
+        );
+
+        tableBody.replaceChildren();
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const cell = addCell(row, "No municipal records found.");
+            cell.colSpan = 7;
+            cell.style.textAlign = "center";
+            tableBody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach(function (item, index) {
+            const row = document.createElement("tr");
+
+            addCell(row, index + 1);
+            addCell(row, item.country);
+            addCell(row, item.province);
+            addCell(row, item.district);
+            addCell(row, item.name);
+            addCell(row, item.status);
+
+            const actionCell = document.createElement("td");
+            const editBtn = document.createElement("button");
+            editBtn.type = "button";
+            editBtn.className = "edit-btn";
+            editBtn.textContent = "Edit";
+
+            editBtn.addEventListener("click", function () {
+                editingId = item.id;
+
+                loadCountries();
+                country.value = item.country;
+                loadProvinces();
+                province.value = item.province;
+                loadDistricts();
+                district.value = item.district;
+
+                nameInput.value = item.name;
+                statusInput.value = item.status;
+
+                formTitle.textContent = "Edit Municipal";
+                saveBtn.textContent = "Update Municipal";
+
+                nameInput.focus();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            actionCell.appendChild(editBtn);
+            row.appendChild(actionCell);
+            tableBody.appendChild(row);
+        });
+    }
+
+    country.addEventListener("change", loadProvinces);
+    province.addEventListener("change", loadDistricts);
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const record = {
+            country: country.value,
+            province: province.value,
+            district: district.value,
+            name: nameInput.value.trim(),
+            status: statusInput.value
+        };
+
+        if (!record.country || !record.province ||
+            !record.district || !record.name) {
+            alert("Please complete all required fields.");
+            return;
+        }
+
+        const duplicate = municipalities.some(item =>
+            normalize(item.country) === normalize(record.country) &&
+            normalize(item.province) === normalize(record.province) &&
+            normalize(item.district) === normalize(record.district) &&
+            normalize(item.name) === normalize(record.name) &&
+            item.id !== editingId
+        );
+
+        if (duplicate) {
+            alert("This municipal record already exists.");
+            return;
+        }
+
+        if (editingId !== null) {
+            const existing = municipalities.find(
+                item => item.id === editingId
+            );
+
+            if (existing) Object.assign(existing, record);
+        } else {
+            municipalities.push({
+                id: crypto.randomUUID(),
+                ...record
+            });
+        }
+
+        saveMunicipals();
+        resetForm();
+        renderTable();
+
+        alert("Municipal saved successfully.");
+    });
+
+    clearBtn.addEventListener("click", resetForm);
+    search.addEventListener("input", renderTable);
+
+    window.addEventListener("storage", function (event) {
+        if (["emrCountries", "emrProvinces", "emrDistricts"]
+            .includes(event.key)) {
+            loadCountries();
+        }
+
+        if (event.key === "emrMunicipals") {
+            municipalities = readData("emrMunicipals");
+            renderTable();
+        }
+    });
+
+    loadCountries();
+    renderTable();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District Master | MediCare EMR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>🏥 MediCare</h2>
+            <p>EMR System</p>
+        </div>
+
+        <nav>
+            <a href="index.html">🏠 Dashboard</a>
+            <a href="patient.html">👤 Patients</a>
+            <a href="registration.html">📝 Registration</a>
+            <a href="appointment.html">📅 Appointments</a>
+            <a href="billing.html">💳 Billing</a>
+            <a href="report.html">📊 Reports</a>
+
+            <button type="button" class="master-menu-button open"
+                    id="masterMenuButton">
+                <span>☷ Master</span>
+                <span class="master-arrow">▼</span>
+            </button>
+
+            <div class="master-submenu show" id="masterSubmenu">
+
+                <button type="button" class="address-menu-button open"
+                        id="addressMenuButton">
+                    <span>○ Address</span>
+                    <span class="address-arrow">▼</span>
+                </button>
+
+                <div class="address-submenu show" id="addressSubmenu">
+                    <a href="master-country.html">○ Country</a>
+                    <a href="master-province.html">○ Province</a>
+                    <a href="master-district.html" class="active">○ District</a>
+                    <a href="master-municipal.html">○ Municipal</a>
+                    <a href="master-occupation.html">○ Occupation</a>
+                    <a href="master-religion.html">○ Religion</a>
+                    <a href="master-ethnic-group.html">○ Ethnic Group</a>
+                    <a href="master-identity-proof-type.html">○ Identity Proof Type</a>
+                    <a href="master-disability.html">○ Disability</a>
+                </div>
+            </div>
+
+            <a href="setting.html">⚙️ Settings</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="topbar">
+            <div>
+                <h1>District Master</h1>
+                <p>Master / Address / District</p>
+            </div>
+            <div class="admin">👤 Admin</div>
+        </div>
+
+        <section class="master-form-card">
+            <h2 id="districtFormTitle">Add New District</h2>
+            <p>Select a country and province before adding a district.</p>
+
+            <form id="districtForm">
+                <div class="master-form-grid">
+
+                    <div class="master-form-group">
+                        <label for="districtCountry">Country *</label>
+                        <select id="districtCountry" required>
+                            <option value="">Select Country</option>
+                        </select>
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="districtProvince">Province *</label>
+                        <select id="districtProvince" required>
+                            <option value="">Select Province</option>
+                        </select>
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="districtName">District Name *</label>
+                        <input type="text" id="districtName"
+                               placeholder="Enter district name" required>
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="districtStatus">Is Active</label>
+                        <select id="districtStatus">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="master-actions">
+                    <button type="button" id="clearDistrictBtn"
+                            class="master-btn master-clear-btn">
+                        Clear
+                    </button>
+
+                    <button type="submit" id="saveDistrictBtn"
+                            class="master-btn master-save-btn">
+                        Save District
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="master-list-card">
+            <div class="master-list-header">
+                <div>
+                    <h2>District List</h2>
+                    <p>Manage districts registered in District Master.</p>
+                </div>
+
+                <div class="master-search">
+                    <span>🔍</span>
+                    <input type="search" id="districtSearch"
+                           placeholder="Search district...">
+                </div>
+            </div>
+
+            <div class="master-table-wrapper">
+                <table class="master-table">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Country</th>
+                            <th>Province</th>
+                            <th>District Name</th>
+                            <th>Is Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="districtTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const countrySelect = document.getElementById("districtCountry");
+    const provinceSelect = document.getElementById("districtProvince");
+    const nameInput = document.getElementById("districtName");
+    const statusSelect = document.getElementById("districtStatus");
+    const form = document.getElementById("districtForm");
+    const searchInput = document.getElementById("districtSearch");
+    const tableBody = document.getElementById("districtTableBody");
+    const clearButton = document.getElementById("clearDistrictBtn");
+    const saveButton = document.getElementById("saveDistrictBtn");
+    const formTitle = document.getElementById("districtFormTitle");
+
+    const storageKey = "emrDistricts";
+    let editingId = null;
+
+    function readData(key) {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            console.error("Error reading " + key, error);
+            return [];
+        }
+    }
+
+    let districts = readData(storageKey);
+
+    function addOption(select, label, value) {
+        select.add(new Option(label, value));
+    }
+
+    function loadCountries() {
+        const previous = countrySelect.value;
+        countrySelect.replaceChildren();
+        addOption(countrySelect, "Select Country", "");
+
+        readData("emrCountries")
+            .filter(item => item.status === "Active")
+            .forEach(item => addOption(countrySelect, item.name, item.name));
+
+        if ([...countrySelect.options].some(o => o.value === previous)) {
+            countrySelect.value = previous;
+        }
+
+        loadProvinces();
+    }
+
+    function loadProvinces() {
+        const previous = provinceSelect.value;
+        provinceSelect.replaceChildren();
+        addOption(provinceSelect, "Select Province", "");
+
+        const selectedCountry = countrySelect.value.trim().toLowerCase();
+
+        readData("emrProvinces")
+            .filter(item =>
+                item.status === "Active" &&
+                String(item.country).trim().toLowerCase() === selectedCountry
+            )
+            .forEach(item => addOption(provinceSelect, item.name, item.name));
+
+        if ([...provinceSelect.options].some(o => o.value === previous)) {
+            provinceSelect.value = previous;
+        }
+    }
+
+    function saveDistricts() {
+        localStorage.setItem(storageKey, JSON.stringify(districts));
+    }
+
+    function resetForm() {
+        form.reset();
+        editingId = null;
+        formTitle.textContent = "Add New District";
+        saveButton.textContent = "Save District";
+        loadCountries();
+    }
+
+    function addCell(row, value) {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+        return cell;
+    }
+
+    function renderDistricts() {
+        const keyword = searchInput.value.trim().toLowerCase();
+
+        const filtered = districts.filter(item =>
+            String(item.country).toLowerCase().includes(keyword) ||
+            String(item.province).toLowerCase().includes(keyword) ||
+            String(item.name).toLowerCase().includes(keyword)
+        );
+
+        tableBody.replaceChildren();
+
+        if (!filtered.length) {
+            const row = document.createElement("tr");
+            const cell = addCell(row, "No districts found.");
+            cell.colSpan = 6;
+            cell.style.textAlign = "center";
+            tableBody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach((district, index) => {
+            const row = document.createElement("tr");
+
+            addCell(row, index + 1);
+            addCell(row, district.country);
+            addCell(row, district.province);
+            addCell(row, district.name);
+
+            const statusCell = addCell(row, district.status);
+            statusCell.style.fontWeight = "bold";
+            statusCell.style.color =
+                district.status === "Active" ? "#176b4d" : "#a12a2a";
+
+            const actionCell = document.createElement("td");
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.className = "edit-btn";
+            editButton.textContent = "Edit";
+
+            editButton.addEventListener("click", function () {
+                editingId = district.id;
+
+                loadCountries();
+                countrySelect.value = district.country;
+                loadProvinces();
+                provinceSelect.value = district.province;
+                nameInput.value = district.name;
+                statusSelect.value = district.status;
+
+                formTitle.textContent = "Edit District";
+                saveButton.textContent = "Update District";
+
+                nameInput.focus();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            actionCell.appendChild(editButton);
+            row.appendChild(actionCell);
+            tableBody.appendChild(row);
+        });
+    }
+
+    countrySelect.addEventListener("change", loadProvinces);
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const country = countrySelect.value;
+        const province = provinceSelect.value;
+        const name = nameInput.value.trim();
+        const status = statusSelect.value;
+
+        if (!country || !province || !name) {
+            alert("Please fill in Country, Province and District.");
+            return;
+        }
+
+        const duplicate = districts.some(item =>
+            item.country.toLowerCase() === country.toLowerCase() &&
+            item.province.toLowerCase() === province.toLowerCase() &&
+            item.name.toLowerCase() === name.toLowerCase() &&
+            item.id !== editingId
+        );
+
+        if (duplicate) {
+            alert("This district already exists under that province.");
+            return;
+        }
+
+        if (editingId !== null) {
+            const existing = districts.find(item => item.id === editingId);
+
+            if (existing) {
+                existing.country = country;
+                existing.province = province;
+                existing.name = name;
+                existing.status = status;
+            }
+        } else {
+            districts.push({
+                id: crypto.randomUUID(),
+                country,
+                province,
+                name,
+                status
+            });
+        }
+
+        saveDistricts();
+        resetForm();
+        renderDistricts();
+
+        alert("District saved successfully.");
+    });
+
+    clearButton.addEventListener("click", resetForm);
+    searchInput.addEventListener("input", renderDistricts);
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === "emrCountries" ||
+            event.key === "emrProvinces") {
+            loadCountries();
+        }
+
+        if (event.key === storageKey) {
+            districts = readData(storageKey);
+            renderDistricts();
+        }
+    });
+
+    loadCountries();
+    renderDistricts();
+});
+</script>
+
+</body>
+</html>

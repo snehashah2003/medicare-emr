@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Province Master | MediCare EMR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>🏥 MediCare</h2>
+            <p>EMR System</p>
+        </div>
+
+        <nav>
+            <a href="index.html">🏠 Dashboard</a>
+            <a href="patient.html">👤 Patients</a>
+            <a href="registration.html">📝 Registration</a>
+            <a href="appointment.html">📅 Appointments</a>
+            <a href="billing.html">💳 Billing</a>
+            <a href="salesreturn.html">🧾 Sales Return</a>
+            <a href="pharmacy.html">💊 Pharmacy</a>
+            <a href="lab.html">🧪 Laboratory</a>
+            <a href="surgery.html">🏥 Surgery</a>
+            <a href="report.html">📊 Reports</a>
+
+            <button type="button"
+                    class="master-menu-button open"
+                    id="masterMenuButton">
+                <span>☷ Master</span>
+                <span class="master-arrow">▼</span>
+            </button>
+
+            <div class="master-submenu show" id="masterSubmenu">
+
+                <button type="button"
+                        class="address-menu-button open"
+                        id="addressMenuButton">
+                    <span>○ Address</span>
+                    <span class="address-arrow">▼</span>
+                </button>
+
+                <div class="address-submenu show" id="addressSubmenu">
+                    <a href="master-country.html">○ Country</a>
+                    <a href="master-province.html" class="active">○ Province</a>
+                    <a href="master-district.html">○ District</a>
+                    <a href="master-municipal.html">○ Municipal</a>
+                    <a href="master-occupation.html">○ Occupation</a>
+                    <a href="master-religion.html">○ Religion</a>
+                    <a href="master-ethnic-group.html">○ Ethnic Group</a>
+                    <a href="master-identity-proof-type.html">○ Identity Proof Type</a>
+                    <a href="master-disability.html">○ Disability</a>
+                </div>
+
+            </div>
+
+            <a href="setting.html">⚙️ Settings</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="topbar">
+            <div>
+                <h1>Province Master</h1>
+                <p>Master / Address / Province</p>
+            </div>
+
+            <div class="admin">
+                👤 Admin
+            </div>
+        </div>
+
+        <!-- ADD PROVINCE -->
+        <section class="master-form-card">
+            <h2 id="formTitle">Add New Province</h2>
+            <p>Add provinces under countries registered in Country Master.</p>
+
+            <form id="provinceForm">
+                <div class="master-form-grid">
+
+                    <div class="master-form-group">
+                        <label for="provinceCountry">Country *</label>
+                        <select id="provinceCountry" required>
+                            <option value="">Select Country</option>
+                        </select>
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="provinceName">Province Name *</label>
+                        <input type="text"
+                               id="provinceName"
+                               placeholder="Enter province name"
+                               required>
+                    </div>
+
+                    <div class="master-form-group">
+                        <label for="provinceStatus">Is Active</label>
+                        <select id="provinceStatus">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="master-actions">
+                    <button type="button"
+                            class="master-btn master-clear-btn"
+                            id="clearProvinceBtn">
+                        Clear
+                    </button>
+
+                    <button type="submit"
+                            class="master-btn master-save-btn"
+                            id="saveProvinceBtn">
+                        Save Province
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- PROVINCE LIST -->
+        <section class="master-list-card">
+
+            <div class="master-list-header">
+                <div>
+                    <h2>Province List</h2>
+                    <p>View and manage saved provinces</p>
+                </div>
+
+                <div class="master-search">
+                    <span>🔍</span>
+                    <input type="search"
+                           id="provinceSearch"
+                           placeholder="Search province...">
+                </div>
+            </div>
+
+            <div class="master-table-wrapper">
+                <table class="master-table">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Country</th>
+                            <th>Province Name</th>
+                            <th>Is Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="provinceTableBody"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- SHARED JAVASCRIPT -->
+<script src="script.js"></script>
+
+<!-- PROVINCE JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("provinceForm");
+    const countrySelect = document.getElementById("provinceCountry");
+    const nameInput = document.getElementById("provinceName");
+    const statusInput = document.getElementById("provinceStatus");
+    const searchInput = document.getElementById("provinceSearch");
+    const tableBody = document.getElementById("provinceTableBody");
+    const clearButton = document.getElementById("clearProvinceBtn");
+    const saveButton = document.getElementById("saveProvinceBtn");
+    const formTitle = document.getElementById("formTitle");
+
+    const storageKey = "emrProvinces";
+    let editingId = null;
+
+    function readArray(key) {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            console.error("Storage error:", error);
+            return [];
+        }
+    }
+
+    let provinces = readArray(storageKey);
+
+    function getCountries() {
+        return readArray("emrCountries");
+    }
+
+    function loadCountries() {
+        const previousValue = countrySelect.value;
+
+        countrySelect.replaceChildren();
+
+        const placeholder = new Option("Select Country", "");
+        countrySelect.appendChild(placeholder);
+
+        getCountries()
+            .filter(country => country.status === "Active")
+            .forEach(country => {
+                const option = new Option(country.name, country.name);
+                countrySelect.appendChild(option);
+            });
+
+        if (Array.from(countrySelect.options)
+            .some(option => option.value === previousValue)) {
+            countrySelect.value = previousValue;
+        }
+    }
+
+    function saveProvinces() {
+        localStorage.setItem(storageKey, JSON.stringify(provinces));
+    }
+
+    function clearForm() {
+        form.reset();
+        editingId = null;
+        formTitle.textContent = "Add New Province";
+        saveButton.textContent = "Save Province";
+    }
+
+    function addCell(row, text) {
+        const cell = document.createElement("td");
+        cell.textContent = text;
+        row.appendChild(cell);
+        return cell;
+    }
+
+    function renderProvinces() {
+        const search = searchInput.value.toLowerCase().trim();
+
+        const filtered = provinces.filter(province =>
+            String(province.name).toLowerCase().includes(search) ||
+            String(province.country).toLowerCase().includes(search)
+        );
+
+        tableBody.replaceChildren();
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const cell = addCell(row, "No provinces found.");
+            cell.colSpan = 5;
+            cell.style.textAlign = "center";
+            tableBody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach((province, index) => {
+            const row = document.createElement("tr");
+
+            addCell(row, index + 1);
+            addCell(row, province.country);
+            addCell(row, province.name);
+
+            const statusCell = addCell(row, province.status);
+            statusCell.style.fontWeight = "bold";
+            statusCell.style.color =
+                province.status === "Active" ? "#176b4d" : "#a12a2a";
+
+            const actionCell = document.createElement("td");
+
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.textContent = "Edit";
+            editButton.className = "edit-btn";
+
+            editButton.addEventListener("click", function () {
+                editingId = province.id;
+
+                loadCountries();
+                countrySelect.value = province.country;
+                nameInput.value = province.name;
+                statusInput.value = province.status;
+
+                formTitle.textContent = "Edit Province";
+                saveButton.textContent = "Update Province";
+
+                nameInput.focus();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            actionCell.appendChild(editButton);
+            row.appendChild(actionCell);
+            tableBody.appendChild(row);
+        });
+    }
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const country = countrySelect.value;
+        const name = nameInput.value.trim();
+        const status = statusInput.value;
+
+        if (!country || !name) {
+            alert("Please select a country and enter a province name.");
+            return;
+        }
+
+        const duplicate = provinces.some(province =>
+            province.country.toLowerCase() === country.toLowerCase() &&
+            province.name.toLowerCase() === name.toLowerCase() &&
+            province.id !== editingId
+        );
+
+        if (duplicate) {
+            alert("This province already exists under the selected country.");
+            return;
+        }
+
+        if (editingId !== null) {
+            const existing = provinces.find(p => p.id === editingId);
+
+            if (existing) {
+                existing.country = country;
+                existing.name = name;
+                existing.status = status;
+            }
+        } else {
+            provinces.push({
+                id: crypto.randomUUID(),
+                country: country,
+                name: name,
+                status: status
+            });
+        }
+
+        saveProvinces();
+        clearForm();
+        renderProvinces();
+
+        alert("Province saved successfully.");
+    });
+
+    clearButton.addEventListener("click", clearForm);
+    searchInput.addEventListener("input", renderProvinces);
+
+    window.addEventListener("storage", function (event) {
+        if (event.key === "emrCountries") {
+            loadCountries();
+        }
+
+        if (event.key === storageKey) {
+            provinces = readArray(storageKey);
+            renderProvinces();
+        }
+    });
+
+    loadCountries();
+    renderProvinces();
+
+});
+</script>
+
+</body>
+</html>

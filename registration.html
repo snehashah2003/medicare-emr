@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Patient Registration | MediCare EMR</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🏥 MediCare</h2>
+            <p>EMR System</p>
+        </div>
+
+        <nav>
+            
+            <a href="index.html">🏠 Dashboard</a>
+            <a href="patient.html">👤 Patients</a>
+            <a href="registration.html" class="active">📝 Registration</a>
+            <a href="appointment.html">📅 Appointments</a>
+            <a href="billing.html">💳 Billing</a>
+            <a href="salesreturn.html">🧾 Sales Return</a>
+            <a href="pharmacy.html">💊 Pharmacy</a>
+            <a href="lab.html">🧪 Laboratory</a>
+            <a href="surgery.html">🏥 Surgery</a>
+            <a href="report.html">📊 Reports</a>
+            
+<!-- MASTER MENU -->
+<button
+    type="button"
+    class="master-menu-button"
+    id="masterMenuButton"
+>
+    <span>☷ Master</span>
+    <span class="master-arrow">▼</span>
+</button>
+
+<div class="master-submenu" id="masterSubmenu">
+
+    <!-- ADDRESS -->
+    <button
+        type="button"
+        class="address-menu-button"
+        id="addressMenuButton"
+    >
+        <span>○ Address</span>
+        <span class="address-arrow">▼</span>
+    </button>
+
+    <div class="address-submenu" id="addressSubmenu">
+        <a href="master-country.html">○ Country</a>
+        <a href="master-province.html">○ Province</a>
+        <a href="master-district.html">○ District</a>
+        <a href="master-municipal.html">○ Municipal</a>
+        <a href="master-occupation.html">○ Occupation</a>
+        <a href="master-religion.html">○ Religion</a>
+        <a href="master-ethnic-group.html">○ Ethnic Group</a>
+        <a href="master-identity-proof-type.html">○ Identity Proof Type</a>
+        <a href="master-disability.html">○ Disability</a>
+    </div>
+
+    <!-- REGISTRATION MASTER -->
+    <a href="master-patient.html">○ Patient</a>
+    <a href="master-department.html">○ Department / Specialty</a>
+    <a href="master-doctor.html">○ Doctor</a>
+    <a href="master-employee.html">○ Employee</a>
+    <a href="master-appointment-schedule.html">○ Appointment Time Schedule</a>
+    <a href="master-doctor-schedule.html">○ Doctor Schedule</a>
+    <a href="master-doctor-day-off.html">○ Doctor's Day Off Schedule</a>
+    <a href="master-donor.html">○ Donor</a>
+    <a href="master-appointment-category.html">○ Appointment Category</a>
+    <a href="master-registration-type.html">○ Registration Type</a>
+    <a href="master-user-registration-type.html">○ User Registration Type</a>
+    <a href="master-user-care-type.html">○ User Care Type Map</a>
+    <a href="master-registration-time.html">○ Registration Type Available Time</a>
+    <a href="master-opd-time.html">○ OPD Unit Available Time</a>
+    <a href="master-sub-specialty.html">○ Sub Specialty</a>
+    <a href="master-opd-unit.html">○ Opd Unit</a>
+    <a href="master-opd-quota.html">○ Opd Unit Quota</a>
+    <a href="master-working-shift.html">○ Working Shift</a>
+    <a href="master-glossary.html">○ Master Glossary</a>
+    <a href="master-advice-group.html">○ Advice Group</a>
+    <a href="master-investigation.html">○ Investigation</a>
+    <a href="master-emr-priority.html">○ EMR Priority</a>
+    <a href="master-patient-movement-state.html">○ Patient Movement State</a>
+    <a href="master-patient-movement-station.html">○ Patient Movement Station</a>
+    <a href="master-station-employee.html">○ Station Employee</a>
+    <a href="master-unit-station.html">○ Unit Station</a>
+    <a href="master-sub-speciality-station.html">○ Sub Speciality Station</a>
+    <a href="master-reg-followup-type.html">○ Reg Followup Type</a>
+    <a href="master-follow-up-setup.html">○ Follow Up Setup</a>
+
+    <!-- EMR MASTER -->
+    <a href="master-finding.html">○ Finding Master</a>
+    <a href="master-emr-section.html">○ Emr Section</a>
+    <a href="master-emr-module.html">○ Emr Module Master</a>
+    <a href="master-user-emr-module-permission.html">○ User Emr Module Permission</a>
+    <a href="master-user-emr-module.html">○ User Emr Module</a>
+    <a href="master-diagnosis.html">○ Diagnosis</a>
+    <a href="master-medicine.html">○ Medicine</a>
+    <a href="master-medicine-template-paperless.html">○ Medicine Advice Templates (For Paperless)</a>
+    <a href="master-medicine-template-coding.html">○ Medicine Advice Templates (For Coding)</a>
+    <a href="master-treatment-plan-therapy.html">○ Treatment Plan Therapy</a>
+    <a href="master-medical-management.html">○ Medical Management</a>
+
+    <!-- SURGERY MASTER -->
+    <a href="master-discharge-print-template.html">○ Discharge Print Template</a>
+    <a href="master-ward.html">○ Ward</a>
+    <a href="master-bed.html">○ Bed</a>
+    <a href="master-surgery.html">○ Surgery</a>
+    <a href="master-surgery-technique.html">○ Surgery Technique</a>
+    <a href="master-surgery-iol.html">○ Surgery IOL</a>
+    <a href="master-surgery-detail-item.html">○ Surgery Detail Item</a>
+    <a href="master-implant-product-group-map.html">○ Implant Product Group Map</a>
+    <a href="master-surgery-technique-iol-map.html">○ Surgery Technique IOL Map</a>
+    <a href="master-surgery-detail-item-map.html">○ Surgery Detail Item Map</a>
+
+    <!-- OTHER MASTER -->
+    <a href="master-patient-transfer-policy.html">○ Manage Patient Transfer Policy</a>
+    <a href="master-referred-center-out.html">○ Referred Center (Out)</a>
+    <a href="master-referred-out-onboarding.html">○ Referred Out Center On Boarding</a>
+    <a href="master-referral-in-onboarding.html">○ Referral In Center On Boarding</a>
+    <a href="master-referral-center-branch-map.html">○ Referral Center (In) Branch Map</a>
+    <a href="master-procedure-note-template.html">○ Procedure Note Template</a>
+    <a href="master-dashboard-widget-setting.html">○ Dashboard Widget Setting</a>
+    <a href="master-telemedicine-configuration.html">○ Telemedicine Configuration</a>
+
+</div>
+
+            <a href="setting.html">⚙️ Settings</a>
+        </nav>
+
+
+    </aside>
+
+
+    <!-- =====================================
+         MAIN CONTENT
+    ====================================== -->
+
+    <main class="main-content">
+
+        <section class="registration-page">
+
+
+            <!-- =====================================
+                 PAGE HEADER
+            ====================================== -->
+
+            <div class="registration-heading">
+
+                <div>
+                
+
+                    <h4>New Patient Registration</h4>
+
+                    
+                </div>
+
+
+                <div class="registration-number">
+
+                    <span>REGISTRATION NO.</span>
+
+                    <strong id="registrationNumber">
+                        REG-1001
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 REGISTRATION FORM
+            ====================================== -->
+
+            <form id="patientForm">
+
+
+                <!-- =====================================
+                     PATIENT INFORMATION
+                ====================================== -->
+
+                <div class="form-card patient-card">
+
+                    <div class="form-card-title">
+
+                        <div class="title-icon">
+                            👤
+                        </div>
+
+                        <div>
+                            <h3>Patient Information</h3>
+                            <p>Basic patient details</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- REGISTRATION DATE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Registration Date *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="registrationDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PATIENT TYPE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Patient Type *
+                            </label>
+
+                            <select
+                                id="patientType"
+                                required
+                            >
+
+                                <option value="">
+                                    Select patient type
+                                </option>
+
+                                <option>
+                                    New Patient
+                                </option>
+
+                                <option>
+                                    Old Patient
+                                </option>
+
+                                <option>
+                                    Emergency
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- REGISTRATION TYPE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Registration Type *
+                            </label>
+
+                            <select
+                                id="registrationType"
+                                required
+                            >
+
+                                <option value="">
+                                    Select registration type
+                                </option>
+
+                                <option>OPD</option>
+
+                                <option>
+                                    Emergency
+                                </option>
+
+                                <option>
+                                    Follow-up
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- FIRST NAME -->
+
+                        <div class="form-group">
+
+                            <label>
+                                First Name *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="firstName"
+                                placeholder="Enter first name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- MIDDLE NAME -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Middle Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="middleName"
+                                placeholder="Enter middle name"
+                            >
+
+                        </div>
+
+
+                        <!-- LAST NAME -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Last Name *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="lastName"
+                                placeholder="Enter last name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- DATE OF BIRTH -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Date of Birth
+                            </label>
+
+                            <input
+                                type="date"
+                                id="dob"
+                            >
+
+                        </div>
+
+
+                        <!-- AGE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Age
+                            </label>
+
+                            <div class="age-inputs">
+
+                                <input
+                                    type="number"
+                                    id="ageYears"
+                                    placeholder="Years"
+                                    min="0"
+                                >
+
+                                <input
+                                    type="number"
+                                    id="ageMonths"
+                                    placeholder="Months"
+                                    min="0"
+                                    max="11"
+                                >
+
+                                <input
+                                    type="number"
+                                    id="ageDays"
+                                    placeholder="Days"
+                                    min="0"
+                                    max="31"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- GENDER -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Gender *
+                            </label>
+
+                            <select
+                                id="gender"
+                                required
+                            >
+
+                                <option value="">
+                                    Select gender
+                                </option>
+
+                                <option>Female</option>
+                                <option>Male</option>
+                                <option>Other</option>
+
+                                <option>
+                                    Prefer not to say
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- MOBILE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Mobile Number *
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="mobile"
+                                placeholder="98XXXXXXXX"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="patient@example.com"
+                            >
+
+                        </div>
+
+
+                        <!-- MARITAL STATUS -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Marital Status
+                            </label>
+
+                            <select id="maritalStatus">
+
+                                <option value="">
+                                    Select status
+                                </option>
+
+                                <option>Single</option>
+                                <option>Married</option>
+                                <option>Other</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================
+                     ADDRESS
+                ====================================== -->
+
+                <div class="form-card address-card">
+
+                    <div class="form-card-title">
+
+                        <div class="title-icon">
+                            📍
+                        </div>
+
+                        <div>
+                            <h3>Address & Contact</h3>
+
+                            <p>
+                                Patient location and contact information
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- COUNTRY -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Country *
+                            </label>
+
+                            <select
+                                id="country"
+                                required
+                            >
+                                <option>Nepal</option>
+                            </select>
+
+                        </div>
+
+
+                        <!-- PROVINCE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Province *
+                            </label>
+
+                            <select
+                                id="province"
+                                required
+                            >
+
+                                <option value="">
+                                    Select province
+                                </option>
+
+                                <option>
+                                    Koshi Province
+                                </option>
+
+                                <option>
+                                    Madhesh Province
+                                </option>
+
+                                <option>
+                                    Bagmati Province
+                                </option>
+
+                                <option>
+                                    Gandaki Province
+                                </option>
+
+                                <option>
+                                    Lumbini Province
+                                </option>
+
+                                <option>
+                                    Karnali Province
+                                </option>
+
+                                <option>
+                                    Sudurpashchim Province
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- DISTRICT -->
+
+                        <div class="form-group">
+
+                            <label>
+                                District *
+                            </label>
+
+                            <select
+                                id="district"
+                                required
+                            >
+
+                                <option value="">
+                                    Select district
+                                </option>
+
+                                <option>Morang</option>
+                                <option>Sunsari</option>
+                                <option>Jhapa</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- MUNICIPALITY -->
+
+                        <div class="form-group">
+
+                            
+
+                           <div class="form-group">
+    <label for="municipality">Municipal/ VDC*</label>
+
+    <select id="municipality" name="municipality">
+        <option value="">Select Municipal</option>
+    </select>
+</div>
+                            
+
+                        </div>
+
+
+                        <!-- WARD -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Ward No.
+                            </label>
+
+                            <select id="ward">
+
+                                <option value="">
+                                    Select ward
+                                </option>
+
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- TOLE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Tole / Street
+                            </label>
+
+                            <input
+                                type="text"
+                                id="tole"
+                                placeholder="Enter tole / street"
+                            >
+
+                        </div>
+
+
+
+
+
+
+
+                <!-- =====================================
+                     ADDITIONAL INFORMATION
+                     CLOSED BY DEFAULT
+                ====================================== -->
+
+                <details class="form-card additional-card">
+
+                    <summary class="form-card-title additional-summary">
+
+                        <div class="title-icon additional-icon">
+                            📋
+                        </div>
+
+                        <div class="title-text">
+
+                            <h3>
+                                Additional Information
+                            </h3>
+
+                            <p>
+                                Click to show optional patient information
+                            </p>
+
+                        </div>
+
+                        <div class="summary-arrow">
+                            ▼
+                        </div>
+
+                    </summary>
+
+
+                    <div class="additional-content">
+
+                        <div class="form-grid">
+
+
+                            <!-- OCCUPATION -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Occupation
+                                </label>
+
+                                <select id="occupation">
+
+                                    <option value="">
+                                        Select occupation
+                                    </option>
+
+                                    <option>Student</option>
+                                    <option>Business</option>
+                                    <option>Employee</option>
+                                    <option>Farmer</option>
+                                    <option>Retired</option>
+                                    <option>Other</option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- RELIGION -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Religion
+                                </label>
+
+                                <select id="religion">
+
+                                    <option value="">
+                                        Select religion
+                                    </option>
+
+                                    <option>
+                                        Prefer not to say
+                                    </option>
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- ETHNIC GROUP -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Ethnic Group
+                                </label>
+
+                                <select id="ethnicGroup">
+
+                                    <option value="">
+                                        Select ethnic group
+                                    </option>
+
+                                    <option>
+                                        Prefer not to say
+                                    </option>
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- OLD MR -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Old MR No.
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="oldMrno"
+                                    placeholder="Previous record number"
+                                >
+
+                            </div>
+
+
+                            <!-- OPD UNIT -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    OPD Unit
+                                </label>
+
+                                <select id="opdUnit">
+
+                                    <option value="">
+                                        Select OPD unit
+                                    </option>
+
+                                    <option>
+                                        General
+                                    </option>
+
+                                    <option>
+                                        Pediatric
+                                    </option>
+
+                                    <option>
+                                        Eye / Ophthalmology
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- SOURCE -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    How did you hear about us?
+                                </label>
+
+                                <select id="hearAbout">
+
+                                    <option value="">
+                                        Select one
+                                    </option>
+
+                                    <option>
+                                        Friend / Family
+                                    </option>
+
+                                    <option>
+                                        Doctor Referral
+                                    </option>
+
+                                    <option>
+                                        Camp
+                                    </option>
+
+                                    <option>
+                                        Social Media
+                                    </option>
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- ID TYPE -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Identity Card Type
+                                </label>
+
+                                <select id="identityType">
+
+                                    <option value="">
+                                        Select type
+                                    </option>
+
+                                    <option>
+                                        Citizenship
+                                    </option>
+
+                                    <option>
+                                        Passport
+                                    </option>
+
+                                    <option>
+                                        National ID
+                                    </option>
+
+                                    <option>
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- ID NUMBER -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Identity Card Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="identityNumber"
+                                    placeholder="Enter identity number"
+                                >
+
+                            </div>
+
+
+                            <!-- DOCTOR CONSENT -->
+
+                            <div class="form-group">
+
+                                <label>
+                                    Willing to go for doctor?
+                                </label>
+
+                                <select id="doctorConsent">
+
+                                    <option value="">
+                                        Select one
+                                    </option>
+
+                                    <option>Yes</option>
+                                    <option>No</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ACCESSIBILITY -->
+
+                        <div class="checkbox-section">
+
+                            <label class="checkbox-title">
+                                Disability / Accessibility Needs
+                            </label>
+
+                            <div class="checkbox-grid">
+
+                                <label>
+                                    <input type="checkbox">
+                                    Vision impairment
+                                </label>
+
+                                <label>
+                                    <input type="checkbox">
+                                    Deaf / hard of hearing
+                                </label>
+
+                                <label>
+                                    <input type="checkbox">
+                                    Physical disability
+                                </label>
+
+                                <label>
+                                    <input type="checkbox">
+                                    Autism spectrum disorder
+                                </label>
+
+                                <label>
+                                    <input type="checkbox">
+                                    Intellectual disability
+                                </label>
+
+                                <label>
+                                    <input type="checkbox">
+                                    Other accessibility need
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+                <!-- =====================================
+                     BILLING
+                ====================================== -->
+
+                <div class="form-card billing-card">
+
+                    <div class="form-card-title">
+
+                        <div class="title-icon">
+                            💳
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Billing Information
+                            </h3>
+
+                            <p>
+                                Department, doctor and registration charges
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+
+                        <!-- DEPARTMENT -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Department *
+                            </label>
+
+                            <select
+                                id="department"
+                                required
+                            >
+
+                                <option value="">
+                                    Select department
+                                </option>
+
+                                <option>
+                                    General Medicine
+                                </option>
+
+                                <option>
+                                    Eye / Ophthalmology
+                                </option>
+
+                                <option>
+                                    Pediatrics
+                                </option>
+
+                                <option>
+                                    ENT
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- SUB DEPARTMENT -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Sub Department
+                            </label>
+
+                            <select id="subDepartment">
+
+                                <option value="">
+                                    Select sub department
+                                </option>
+
+                                <option>
+                                    General OPD
+                                </option>
+
+                                <option>
+                                    Follow-up
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- DOCTOR -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Doctor *
+                            </label>
+
+                            <select
+                                id="doctor"
+                                required
+                            >
+
+                                <option value="">
+                                    Select doctor
+                                </option>
+
+                                <option>
+                                    Dr. Demo Sharma
+                                </option>
+
+                                <option>
+                                    Dr. Demo Rai
+                                </option>
+
+                                <option>
+                                    Dr. Demo Shah
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- CHARGE -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Charge
+                            </label>
+
+                            <input
+                                type="number"
+                                id="charge"
+                                value="100"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <!-- DISCOUNT -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Discount
+                            </label>
+
+                            <input
+                                type="number"
+                                id="discount"
+                                value="0"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <!-- TAX -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Tax
+                            </label>
+
+                            <input
+                                type="number"
+                                id="tax"
+                                value="0"
+                                min="0"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BILL SUMMARY -->
+
+                    <div class="bill-summary">
+
+                        <div>
+
+                            <span>
+                                Charge
+                            </span>
+
+                            <strong>
+                                Rs.
+                                <span id="chargeDisplay">
+                                    100.00
+                                </span>
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Discount
+                            </span>
+
+                            <strong>
+                                - Rs.
+                                <span id="discountDisplay">
+                                    0.00
+                                </span>
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Tax
+                            </span>
+
+                            <strong>
+                                + Rs.
+                                <span id="taxDisplay">
+                                    0.00
+                                </span>
+                            </strong>
+
+                        </div>
+
+
+                        <div class="grand-total">
+
+                            <span>
+                                Grand Total
+                            </span>
+
+                            <strong>
+                                Rs.
+                                <span id="grandTotal">
+                                    100.00
+                                </span>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NARRATION -->
+
+                    <div class="form-group narration">
+
+                        <label>
+                            Narration
+                        </label>
+
+                        <textarea
+                            id="narration"
+                            placeholder="Optional billing notes..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================
+                     PAYMENT
+                ====================================== -->
+
+                <div class="form-card payment-card">
+
+                    <div class="form-card-title">
+
+                        <div class="title-icon">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Payment
+                            </h3>
+
+                            <p>
+                                Select payment method and tender amount
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT METHODS -->
+
+                    <div class="payment-methods">
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="Cash"
+                                checked
+                            >
+
+                            💵 Cash
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="Card"
+                            >
+
+                            💳 Card
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="Insurance"
+                            >
+
+                            🛡️ Insurance / SSF
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- PAYMENT CALCULATION -->
+
+                    <div class="payment-calculation">
+
+                        <div class="payment-row">
+
+                            <span>
+                                Total Amount
+                            </span>
+
+                            <strong>
+                                Rs.
+                                <span id="paymentTotal">
+                                    100.00
+                                </span>
+                            </strong>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Tender Amount
+                            </label>
+
+                            <input
+                                type="number"
+                                id="tenderAmount"
+                                value="100"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <div class="payment-row change-row">
+
+                            <span>
+                                Change
+                            </span>
+
+                            <strong>
+                                Rs.
+                                <span id="changeAmount">
+                                    0.00
+                                </span>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONSENT -->
+
+                    <label class="consent-box">
+
+                        <input
+                            type="checkbox"
+                            id="consent"
+                            required
+                        >
+
+                        <span>
+                            I confirm that this is a demo patient
+                            record and the entered information is correct.
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- =====================================
+                     BUTTONS
+                ====================================== -->
+
+                <div class="registration-actions">
+
+                    <button
+                        type="reset"
+                        class="secondary-btn"
+                    >
+                        Clear
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="draft-btn"
+                        id="saveDraftBtn"
+                    >
+                        Save Draft
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="register-patient-btn"
+                    >
+                        ✓ Register Patient
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================
+     SUCCESS MESSAGE
+====================================== -->
+
+<div
+    id="successMessage"
+    class="success-message"
+>
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <div>
+
+        <strong>
+            Patient Registered
+        </strong>
+
+        <p id="successText">
+            Patient was registered successfully.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+<div class="registration-bottom-sections">
+    <!-- Your existing Additional Information section -->
+
+    <!-- Your existing Billing Information section -->
+
+    <!-- Your existing Payment section -->
+</div>
+
+</body>
+
+</html>
